@@ -10,7 +10,7 @@ console.log("Afficher la liste des pays et le compteur");
 let i;
 
 const input = process.argv[2];
-
+ci
 if (input === 'country') {
     //on met que les country dans country
     for (i = 0; i < users.length; i++) {
