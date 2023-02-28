@@ -1,4 +1,5 @@
 const fs = require('fs');
+const process = require('process');
 let rawdata = fs.readFileSync('users.json');
 //on a recupéré les données du fichier et on les stocke dans users
 let users = JSON.parse(rawdata);
@@ -7,10 +8,13 @@ let company = new Array(users.length);
 
 console.log("Menu");
 console.log("Afficher la liste des pays et le compteur");
+console.log("Afficher la liste des societe et le compteur");
+
 let i;
 
 const input = process.argv[2];
-ci
+
+
 if (input === 'country') {
     //on met que les country dans country
     for (i = 0; i < users.length; i++) {
