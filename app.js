@@ -7,6 +7,7 @@ let company = new Array(users.length);
 
 console.log("Menu");
 console.log("Afficher la liste des pays et le compteur");
+let i;
 
 const input = process.argv[2];
 
