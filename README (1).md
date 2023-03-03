@@ -34,3 +34,14 @@ Pour lire un fichier :
 
 const fs = require('fs');
 let rawdata = fs.readFileSync('student.json');
+
+pour manipuler le git y 'a des commande de base:
+
+-git init
+
+-git add
+
+-git commit 
+
+-git push
+
