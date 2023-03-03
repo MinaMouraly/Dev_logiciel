@@ -18,6 +18,8 @@ let i;
         '1= pays\n'+
         '2= societe\n'
     );
+    globalThis;
+    
     //on demande le choix a l'utilisateur 
     var choix= readlineSync.question('Choisissez 1 ou 2:');
     
