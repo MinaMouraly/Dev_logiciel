@@ -45,3 +45,8 @@ pour manipuler le git y 'a des commande de base:
 
 -git push
 
+-pour intaller avec npm:
+
+-npm install
+pour installer une version precise on fait npm install @ et la suite
+pour configurer un fichier on fait par exemple on fait npm init @eslint/config 
