@@ -1,4 +1,5 @@
 const chalk= require('chalk');//permet d'ajouter de la couleur 
+var prompt= require('prompt');
 const fs = require('fs');//require permet de lire un fichier
 const process = require('process');
 let rawdata = fs.readFileSync('users.json');
@@ -6,13 +7,12 @@ let rawdata = fs.readFileSync('users.json');
 let users = JSON.parse(rawdata);// sert  a parser le fichier , il analyse les chaines de caractere
 let country = new Array(users.length);
 let company = new Array(users.length);
-
 let i;
 
-    const input = process.argv[2];//permet d'ecrire et d'avoir le resultat
-
-    const readlineSync = require('readline-sync');//readline permet d'avoir une conversation avec l'utilisateur 
-    //et readlinesync permet d'avoir une conversation avec le terminal
+const input = process.argv[2];//permet d'ecrire et d'avoir le resultat
+const readlineSync = require('readline-sync');//readline permet d'avoir une conversation avec l'utilisateur 
+//et readlinesync permet d'avoir une conversation avec le terminal
+    
     //Log the menu 
     console.log(
         chalk.blue('Menu:\n'+
@@ -22,7 +22,7 @@ let i;
     
     //on demande le choix a l'utilisateur 
     var choix= readlineSync.question('Choisissez 1 ou 2:');
-    
+
     if (choix === '1' || input =='country') {
         //on met que les country dans country
         for (i = 0; i < users.length; i++) {
@@ -66,6 +66,15 @@ let i;
         console.log(res);
     }
    
+    prompt.start();//on commence la demande d'info a l'user
+    
+    prompt.get(['username','email' ],function(err,result){
+     
+        console.log('comande line:\n');
+        console.log('username:'+result.username);
+        console.log('email:'+result.email);
+    
+    });
 
     
 
