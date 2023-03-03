@@ -1,3 +1,4 @@
+const chalk= require('chalk');//permet d'ajouter de la couleur 
 const fs = require('fs');//require permet de lire un fichier
 const process = require('process');
 let rawdata = fs.readFileSync('users.json');
@@ -10,15 +11,14 @@ let i;
 
     const input = process.argv[2];//permet d'ecrire et d'avoir le resultat
 
-    const readlineSync = require("readline-sync");//readline permet d'avoir une conversation avec l'utilisateur 
+    const readlineSync = require('readline-sync');//readline permet d'avoir une conversation avec l'utilisateur 
     //et readlinesync permet d'avoir une conversation avec le terminal
     //Log the menu 
     console.log(
-        'Menu:\n'+
+        chalk.blue('Menu:\n'+
         '1= pays\n'+
-        '2= societe\n'
+        '2= societe\n')
     );
-    globalThis;
     
     //on demande le choix a l'utilisateur 
     var choix= readlineSync.question('Choisissez 1 ou 2:');
