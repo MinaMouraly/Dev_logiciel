@@ -36,7 +36,7 @@ const readlineSync = require('readline-sync');//readline permet d'avoir une conv
         const counts = {};
         for (const num of country) {
             counts[num] = counts[num] ? counts[num] + 1 : 1;
-        }
+        } 
     
         let res = [];
         // on transforme l'objet counts en tableau
@@ -69,7 +69,7 @@ const readlineSync = require('readline-sync');//readline permet d'avoir une conv
         res.sort((a, b) => b.count - a.count);
         console.log(res);
     }
-    else if(choix=='3')
+    else if(choix=='3')//si on veut ajouter un utilisateur
     {
         utilisateur();
     }
@@ -128,6 +128,7 @@ const readlineSync = require('readline-sync');//readline permet d'avoir une conv
   }
 
   main();
+
 
    
    
