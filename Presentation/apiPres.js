@@ -4,43 +4,44 @@
 //create api with express to expose from buisness layer
 var express = require("express");
 const business = require("../business/business");
-var app= express();
+var app = express();
+const cors = require('cors');
 
-const apiServ= {
-
+const apiServ = {
     start: function(port) {
-
-        //add middlesware to parse json
+        
         app.use(express.json());
 
-        app.get("/test",function(req,res){
+        app.use(cors({
+            origin: '*'
+        }));
 
-            console.log(req.query);
+        app.get("/test", function(req, res){
+            const testObj = {
+                test: "test"
+            };
 
-            res.json(
-                {
-                    "test": "test"
-                }
-            )
+            console.log("call done");
+            res.json(testObj);
         });
 
-        app.get("/api/custormers",function(req,res){
+        app.get("/api/customers", function(req, res){
 
-              /* const number = req.query.number;
-               const page = req.query.page;
-               const resCustomers =business.getCustormers;*/
+            const number = req.query.number;
+            const page = req.query.page;
 
-               const customers = business.getAllCustomers();
-               res.json(customers);
+            // get customers from business layer
+            // const customers = business.getAllCustomers();
+            const resCustomers = business.getAllCustomers(number, page);
 
+            // res.json(customers);
+            res.json(resCustomers);
         });
 
-        //add cors middleware
-
-        app.listen(port,function(){
-            console.log("Server running on port\t" + port);
+        app.listen(port, function(){
+            console.log("Server running on port " + port);
         });
     }
-};
+}
 
-module.exports= apiServ;
+module.exports = apiServ;

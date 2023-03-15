@@ -10,7 +10,5 @@ function main(){
     //start console ui
 
     //press.start();
-
-
 }
 main();

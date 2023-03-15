@@ -1,20 +1,19 @@
 const fs = require("fs");
 //const proc = request("process");
-
 //require("doteny").config();
-const filename = "./data/custormes.json";
+const filename = "./data/customers.json";
 
 let datalayer = {
 
-    getAllCustormers : function(){
+    getAllCustomers : function(){
         //read json file
         const data =fs.readFileSync(filename);
 
         //parse to object
-        const custormers = JSON.parse(data);
+        const customers = JSON.parse(data);
 
         //return custormers
-        return custormers;
+        return customers;
     },
 
    /* addCustomers: function(customers){

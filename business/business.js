@@ -9,7 +9,7 @@ const business={
 
     getAllCustomers : function() {
 
-        return dal.getAllcustomers();
+        return dal.getAllCustomers();
     },
 
     getCustomers : function(number, page) {
@@ -25,7 +25,7 @@ const business={
         }
 
         //get data from DAL
-        const resCustomers = dal.getcustormers(number,page);
+        const resCustomers = dal.getCustomers(number,page);
 
         resCustomers.page = page;
         resCustomers.numberByPage = number;
