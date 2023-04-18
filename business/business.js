@@ -1,51 +1,69 @@
-const dal= require("../data/datalayer");
+const dal= require("../data/datalayer");    //import the data layer
 //const  _ = require("underscore");
 
-const defaultNumber=10;
-const defaultPage= 1;
-const maxNumber =100;
+const defaultNumber=10; //default number of customers per page
+const defaultPage= 1;   //default page
+const maxNumber =50;   //max number of customers per page
 
 const business={
 
-    getAllCustomers : function() {
-
-        return dal.getAllCustomers();
+    getAllCustomers : function() {  //get all customers
+        return dal.getAllCustomers();   //call the DAL function
+        
     },
 
-    getCustomers : function(number, page) {
+    getCustomers : function(number, page) { //get customers by page
 
         //check params
-        if(number == undefined || page== undefined) {
-            number = defaultNumber;
+        if(page== undefined) {
+
             page= defaultPage;
+        }
+        
+        if(number == undefined ){ 
+            number = defaultNumber;
         }
 
         if(number> maxNumber ){
-            number - maxNumber;
+            number = maxNumber;
         }
 
         //get data from DAL
         const resCustomers = dal.getCustomers(number,page);
 
         resCustomers.page = page;
-        resCustomers.numberByPage = number;
+        resCustomers.number = number;
         resCustomers.totalPages = Math.ceil(resCustomers.total/ number);
 
         //return customers
-        return resCustomers
-
-        
+        return resCustomers;
+ 
     },
+     
 
-    /*addcustomers: function(customer)
-    {
+   //ajouté un client à la base de données  
+ 
+   addCustomer: function(reqAddCustomer)  {
+        dal.addCustomer(reqAddCustomer);
+         return { success: true, message: "Utilisateur ajouté avec succès." };
 
-    },
+   },
 
-    getCounterByAttriIbute : function(attr){
+   updateUser : function(user){
+    let nb = dal.updateUser(user);
+    if(nb) return { success: true, message: "Utilisateur modifié avec succès." };
+    else return { success: false, message: "Erreur lors de la modification du client." };
+  },
 
-    };*/
-}
+        removeUser : function(user){
+            let nb = dal.removeUser(user);
+            if(nb) return { success: true, message: "Utilisateur supprimé avec succès." };
+            else return { success: false, message: "ID d'utilisateur non trouvé." };
+        }
 
+};
+
+
+//export the business object
 
 module.exports=business;

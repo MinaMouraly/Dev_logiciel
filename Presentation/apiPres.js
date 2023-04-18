@@ -16,15 +16,16 @@ const apiServ = {
             origin: '*'
         }));
 
-        app.get("/test", function(req, res){
-            const testObj = {
-                test: "test"
-            };
+        //recuperer tous les cients
+        app.get("/api/customers/all", function(req, res){
 
-            console.log("call done");
-            res.json(testObj);
+            const customers = business.getAllCustomers();
+
+            //transforme en flux lisible par le navigateur
+            res.status(200).json(customers);
         });
 
+        //recuperer les clients par page
         app.get("/api/customers", function(req, res){
 
             const number = req.query.number;
@@ -32,11 +33,47 @@ const apiServ = {
 
             // get customers from business layer
             // const customers = business.getAllCustomers();
-            const resCustomers = business.getAllCustomers(number, page);
-
+            const resCustomers = business.getCustomers(number, page);
+           
             // res.json(customers);
-            res.json(resCustomers);
+            res.status(200).json(resCustomers);
+        
         });
+
+        //ajoute un client
+        app.post("/api/customers",function(req,res){
+
+            let message = business.addCustomer(req.body);
+            res.status(200).send(message);
+        });
+
+
+        app.put('/api/customers', (req, res) => {
+            let message = business.updateUser(req.body);
+            res.status(200).send(message);
+        })
+
+        app.delete('/api/customers', (req, res) => {
+            const clientid = req.query.id;
+            let message = business.removeUser(clientid);
+            res.status(200).send(message);
+        })
+    /* app.post("/api/customers",function(req,res){
+
+            const reqAddCustomer = {
+                email : req.query.email,
+                first :  req.query.first,
+                last : req.query.last,
+                company : req.query.company,
+                country : req.query.country
+            };
+
+            const formC = business.addcustomer(reqAddCustomer);
+        
+            // res.json(customers);
+            res.json(formC);
+
+        });*/
 
         app.listen(port, function(){
             console.log("Server running on port " + port);
