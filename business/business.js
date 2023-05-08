@@ -1,9 +1,9 @@
 const dal= require("../data/datalayer");    //import the data layer
 //const  _ = require("underscore");
 
-const defaultNumber=10; //default number of customers per page
+const defaultNumber= 10; //default number of customers per page
 const defaultPage= 1;   //default page
-const maxNumber =50;   //max number of customers per page
+const maxNumber = 50;   //max number of customers per page
 
 const business={
 
@@ -40,30 +40,29 @@ const business={
  
     },
      
-
    //ajouté un client à la base de données  
  
-   addCustomer: function(reqAddCustomer)  {
-        dal.addCustomer(reqAddCustomer);
-         return { success: true, message: "Utilisateur ajouté avec succès." };
+    addCustomer: function(newCustomer)  {
+            dal.addCustomer(newCustomer);
+            return { success: true, message: "Utilisateur ajouté avec succès." };
 
-   },
+    },
+    
+    //modifie un client a la base de données
+    updateCustomer : function(customer){
+        let nb = dal.updateCustomer(customer);
+        if(nb) return { success: true, message: "Utilisateur modifié avec succès." };
+        else return { success: false, message: "Erreur lors de la modification du client." };
+    },
 
-   updateUser : function(user){
-    let nb = dal.updateUser(user);
-    if(nb) return { success: true, message: "Utilisateur modifié avec succès." };
-    else return { success: false, message: "Erreur lors de la modification du client." };
-  },
-
-        removeUser : function(user){
-            let nb = dal.removeUser(user);
-            if(nb) return { success: true, message: "Utilisateur supprimé avec succès." };
-            else return { success: false, message: "ID d'utilisateur non trouvé." };
-        }
-
+    //supprime un client a la base de données
+    removeCustomer : function(customer){
+        let nb = dal.removeCustomer(customer);
+        if(nb) return { success: true, message: "Utilisateur supprimé avec succès." };
+        else return { success: false, message: "ID d'utilisateur non trouvé." };
+    }
+    
 };
 
-
 //export the business object
-
 module.exports=business;

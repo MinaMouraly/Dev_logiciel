@@ -3,8 +3,10 @@ const fs = require("fs");
 //require("doteny").config();
 const filename = "./data/customers.json";
 
+
 let datalayer = {
 
+    //Renvoi tous les clients du customers.json
     getAllCustomers : function(){
         //read json file
         const data =fs.readFileSync(filename);
@@ -16,8 +18,8 @@ let datalayer = {
         return customers;
     },
 
-   //renvoie les clients par page
-    getCustomers : function (number, page) {
+   //renvoie que les numero de  clients de la  page
+    getCustomers : function(number, page) {
         {
 
          //read json file
@@ -45,43 +47,38 @@ let datalayer = {
 
         }
     },
-  
+
+
     //ajouter un client à la base de données
-    addCustomer: function(last, first,company,country,email) {
+    addCustomer: function(newCustomer) {
+
         // read existing customer data
-        const data = fs.readFileSync(filename);
-        const customers = JSON.parse(data);
-    
-        // create new customer object
-        const newCustomer = {
-            name: last,
-            first: first,
-            company:company,
-            country:country,
-            email: email,
-        };
+        const dataC = fs.readFileSync(filename);
+        const customers = JSON.parse(dataC);
+         
     
         // add new customer to array
         customers.push(newCustomer);
     
         // save updated customer data to file
         const customerContent = JSON.stringify(customers);
-        fs.writeFileSync(filename, customerContent);
-    
-        return newCustomer;
+
+        fs.writeFileSync(filename, customerContent,err=>{
+            if(err) throw err;
+        });
     },
     
-    updateUser : function(user){
+    updateCustomer : function(customer){
         // Charge le contenu du fichier JSON
         const data = fs.readFileSync(filename);
         const clients = JSON.parse(data);
 
         // Trouve l'objet à mettre à jour
-        const objectid = clients.findIndex(obj => obj.id === user.id);
+        const objectid = clients.findIndex(obj => obj.id === customer.id);
 
         // Si l'objet existe, met à jour ses propriétés avec les données fournies
         if (objectid !== -1) {
-            const updatedObject = { ...clients[objectid], ...user };
+            const updatedObject = { ...clients[objectid], ...customer };
             clients[objectid] = updatedObject;
             // Écrit le nouveau contenu du fichier JSON
             const updatedData = JSON.stringify(clients, null, 2);
@@ -91,26 +88,27 @@ let datalayer = {
             return 0;
         }
     },
-
+   
     //retire l'user en fonction de son id
-    removeUser : function(removeuser){
+    removeCustomer : function(customer){
         //get data from json file
         const rawdata = fs.readFileSync(filename);
         //parse to object
-        let newclients = JSON.parse(rawdata);
+        let newcustomer = JSON.parse(rawdata);
         //findIndex permet de retrouver un user en fonction du param removeuser
-        const id = newclients.findIndex(user => user.id === parseInt(removeuser));
+        const id = newcustomer.findIndex(user => user.id === parseInt(customer));
         if (id != -1) {
             //puis de le retirer s'il existe 
-            newclients.splice(id, 1);
+            newcustomer.splice(id, 1);
             //et de reecrire le fichier
-            fs.writeFileSync(filename, JSON.stringify(newclients, null, 2));
+            fs.writeFileSync(filename, JSON.stringify(newcustomer, null, 2));
             return 1;
         } else 
           return 0;        
     }
-                    
+              
 
 };
+
 
 module.exports= datalayer;
